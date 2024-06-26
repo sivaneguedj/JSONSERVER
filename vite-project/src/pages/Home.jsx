@@ -4,6 +4,7 @@ import  { useNavigate, useParams } from 'react-router-dom';
 import './Home.Module.css';
 
 
+
 const Home = () => {
   
   const actualUser = JSON.parse(localStorage.getItem('user')) || {};
@@ -18,15 +19,15 @@ const Home = () => {
   }
 
   function handleTodos(){
-    navigate(`/users/${userId}/todos/${todosId}`);
+    navigate(`/users/${userId}/todos`);
   }
 
   function handlePosts(){
-    navigate(`/users/${userId}/posts/${postsId}`);
+    navigate(`/users/${userId}/posts`);
   }
 
   function handleAlbums(){
-    navigate(`/users/${userId}/albums/${albumId}`);
+    navigate(`/users/${userId}/albums`);
   }
 
   function handleLogout(){

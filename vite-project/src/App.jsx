@@ -23,9 +23,9 @@ import './App.css'
            <Route path="register" element={<Register />} />
            <Route path="home/users/:userId" element={<Home />} />
            <Route path="complete-registration" element={<CompleteRegistration />} />
-           <Route path="/users/:userId/todos/:todosId" element={<Todos />} />
-          <Route path="/users/:userId/posts/:postsId" element={<Posts />} />
-          <Route path="/users/:userId/albums/:albumsId" element={<Albums />} />
+           <Route path="/users/:userId/todos" element={<Todos />} />
+          <Route path="/users/:userId/posts" element={<Posts />} />
+          <Route path="/users/:userId/albums" element={<Albums />} />
          </Route>
        </Routes>
      </BrowserRouter>
