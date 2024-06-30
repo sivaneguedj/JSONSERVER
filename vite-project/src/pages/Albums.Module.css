@@ -1,0 +1,16 @@
+.user-album{
+    border:1px solid red;
+    width: 10rem;
+    height: 10rem;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+
+.albums-grid{
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
