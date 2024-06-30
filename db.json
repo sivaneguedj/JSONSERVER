@@ -39610,30 +39610,6 @@
   "todos": [
     {
       "userId": 1,
-      "id": "1",
-      "title": "delectus aut autem",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": "2",
-      "title": "quis ut nam facilis et officia qui",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": "3",
-      "title": "fugiat veniam minus",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": "4",
-      "title": "et porro tempora",
-      "completed": true
-    },
-    {
-      "userId": 1,
       "id": "5",
       "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
       "completed": false
@@ -39720,12 +39696,6 @@
       "userId": 1,
       "id": "19",
       "title": "molestiae ipsa aut voluptatibus pariatur dolor nihil",
-      "completed": true
-    },
-    {
-      "userId": 1,
-      "id": "20",
-      "title": "ullam nobis libero sapiente ad optio sint",
       "completed": true
     },
     {
@@ -41058,26 +41028,6 @@
         "name": "Darty",
         "catchPhrase": "Hey there",
         "bs": "engament"
-      }
-    },
-    {
-      "id": "ab22",
-      "username": "sisi",
-      "website": "darty.com",
-      "name": "dana lasri",
-      "email": "dan@gmail.com",
-      "address": {
-        "street": "exod",
-        "suite": "suite 452",
-        "city": "New York",
-        "zipcode": "177774",
-        "geo": "32.6658465"
-      },
-      "phone": "0546354721",
-      "company": {
-        "name": "Darty",
-        "catchPhrase": "hey there",
-        "bs": "engagement"
       }
     }
   ]
