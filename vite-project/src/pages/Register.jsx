@@ -38,7 +38,9 @@ const Register = () => {
           else {
             console.log("New user Accepted");
 
-              const newUser = {
+            const maxId = users.reduce((max, user) => Math.max(max, parseInt(user.id, 10)), 0);
+            const newUser = {
+                id: maxId + 1,
                 username,
                 website: password
               };

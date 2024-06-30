@@ -33,7 +33,7 @@ export default function Fetch( typeRequest ) {
 
 
     return(
-            {data, loading}
+            {data, loading, setData}
         
     );
 

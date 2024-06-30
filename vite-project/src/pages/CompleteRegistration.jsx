@@ -52,7 +52,7 @@ const CompleteRegistration = () => {
 
    
     const newUser = {
-        id: partialUser.newUser.id,
+        id: newUserId,
         ...partialUser.newUser,
         name,
         username: partialUser.newUser.username,
