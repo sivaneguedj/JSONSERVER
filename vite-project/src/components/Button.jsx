@@ -9,7 +9,7 @@ export default function Button({ type, onSubmit, value, classname}) {
             onClick={onSubmit}
             type={type}
             > {value}
-            </button>
+        </button>
     );
 
 }

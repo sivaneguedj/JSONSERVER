@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from "/src/components/Button.jsx";
 import EditTodoForm from "/src/components/EditTodoForm.jsx";
+import AddTodoForm from "/src/components/AddTodoForm.jsx";
 import Fetch from "/src/fetch.jsx";
 import './Home.Module.css';
 
@@ -14,6 +15,8 @@ const Todos = () => {
     const [searchById, setSearchById] = useState(false);
     const [searchByCriteria, setSearchByCriteria] = useState(false);
     const [editTodo, setEditTodo] = useState(null);
+    const [addTodo, setAddTodo] = useState(false);
+
 
     // Fetch all todos data
     const { data: todos, loading , setData: setTodos} = Fetch('todos/');
@@ -93,14 +96,54 @@ const Todos = () => {
 
     // Handle Edit todo
     const handleEditTodo = (todo) => {
-      setEditTodo(todo);
+      setAddTodo(true);
     };
 
 
 
+    // Handle Add todo
+    const handleAddTodo = () => {
+        setAddTodo(true);
+    };
+
+
+    // Handle Save Add
+    const handleSaveAdd = async (newTodo) => {
+      try {
+          const response = await fetch('http://localhost:3500/todos', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ ...newTodo, userId: parseInt(userId) }),
+          });
+
+          if (!response.ok) {
+              throw new Error('Failed to add todo');
+          }
+
+          const addedTodo = await response.json();
+
+          // Update the state with the new todo
+          setTodos([...todos, addedTodo]);
+
+          setAddTodo(false);
+      } catch (error) {
+          console.error('Error adding todo:', error);
+      }
+  };
+
+  // Handle Cancel Add
+  const handleCancelAdd = () => {
+      setAddTodo(false);
+  };
+
+
+
   const handleSaveEdit = async (updatedTodo) => {
+    console.log(updatedTodo.id);
     try {
-        const response = await fetch(`http://localhost:3500/todos/${updatedTodo}`, {
+        const response = await fetch(`http://localhost:3500/todos/${updatedTodo.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -117,7 +160,6 @@ const Todos = () => {
             todo.id === updatedTodo.id ? updatedTodo : todo
         ));
 
-        setShowEditForm(false);
         setEditTodo(null);
     } catch (error) {
         console.error('Error updating todo:', error);
@@ -128,7 +170,7 @@ const Todos = () => {
   // Handle Cancel Edit
   const handleCancelEdit = () => {
     setEditTodo(null);
-};
+  };
 
 
   
@@ -193,6 +235,7 @@ const Todos = () => {
               by Criteria
             </label>
           </div>
+          <Button type="button" onClick={handleAddTodo} value="Add" className="search-button" />
         </div>
         <div className="todos-grid">
           {filteredTodos.length > 0 ? (
@@ -211,7 +254,7 @@ const Todos = () => {
                   />
                   Completed
                 </label>
-                <button onClick={() => handleEditTodo(todo.id)}>Edit</button>
+                <button onClick={() => handleEditTodo(todo)}>Edit</button>
                 <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
               </div>
             ))
@@ -223,11 +266,19 @@ const Todos = () => {
                 <Modal>
                     <EditTodoForm
                         todo={editTodo}
-                        onSave={handleSaveEdit(todo.id)}
-                        onCancel={() => setEditTodo(null)}
+                        onSave={handleSaveEdit}
+                        onCancel={handleCancelEdit}
                     />
                 </Modal>
             )}
+            {addTodo && (
+            <Modal>
+                <AddTodoForm
+                    onSave={handleSaveAdd}
+                    onCancel={handleCancelAdd}
+                />
+            </Modal>
+        )}
       </div>
     );
 };

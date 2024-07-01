@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import './EditTodoForm.module.css';
 
 
 const EditTodoForm = ({ todo, onSave, onCancel }) => {
     const [title, setTitle] = useState(todo.title);
     const [completed, setCompleted] = useState(todo.completed);
 
-    const handleSave = () => {
-        onSave({ ...todo, title, completed });
+    const handleSave = (e) => {
+        e.preventDefault();
+        const updatedTodo = { ...todo, title, completed };
+        onSave(updatedTodo);
     };
 
 
-    const handleCancel = () => {
+    const handleCancel = (e) => {
+        e.preventDefault();
         onCancel();
     };
 
@@ -18,23 +22,25 @@ const EditTodoForm = ({ todo, onSave, onCancel }) => {
         <form className="edit-form">
             <h3>Edit Todo</h3>
             <p>
-                <label>
-                    Title:
-                    <input
+                <label htmlFor='title'> Title:</label>
+                <textarea
+                        id='title'
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                </label>
             </p>
-            <label>
-                Completed:
+            <p>
+                <label htmlFor='completed'>
+                    Completed:
+                </label>
                 <input
-                    type="checkbox"
-                    checked={completed}
-                    onChange={(e) => setCompleted(e.target.checked)}
-                />
-            </label>
+                        id='completed'
+                        type="checkbox"
+                        checked={completed}
+                        onChange={(e) => setCompleted(e.target.checked)}
+                    />
+            </p>
             <button onClick={handleSave}>Save</button>
             <button onClick={handleCancel}>Cancel</button>
         </form>
