@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Button from "/src/components/Button.jsx";
 import EditTodoForm from "/src/components/EditTodoForm.jsx";
-import AddTodoForm from "/src/components/AddTodoForm.jsx";
 import Fetch from "/src/fetch.jsx";
-import './Home.Module.css';
+import style from './Home.module.css';
 
 const Todos = () => {
     
@@ -16,7 +15,10 @@ const Todos = () => {
     const [searchByCriteria, setSearchByCriteria] = useState(false);
     const [editTodo, setEditTodo] = useState(null);
     const [addTodo, setAddTodo] = useState(false);
-
+    const [todoKey, settodoKey] = useState();
+    const [title, setTitle] = useState('');
+    const [completed, setCompleted] = useState(false);
+    const actualUser = JSON.parse(localStorage.getItem('user')) || {};
 
     // Fetch all todos data
     const { data: todos, loading , setData: setTodos} = Fetch('todos/');
@@ -96,26 +98,31 @@ const Todos = () => {
 
     // Handle Edit todo
     const handleEditTodo = (todo) => {
-      setAddTodo(true);
+      setEditTodo(todo);
     };
 
 
 
     // Handle Add todo
-    const handleAddTodo = () => {
-        setAddTodo(true);
-    };
-
-
-    // Handle Save Add
-    const handleSaveAdd = async (newTodo) => {
+    const handleSaveAddTodo = async (e) => {
+      e.preventDefault();
       try {
+          const maxId = todos.reduce((max, todo) => Math.max(max, parseInt(todo.id)), 0);
+          const newId = maxId + 1;
+
+          const newTodo = {
+              userId: parseInt(userId),
+              id: newId,
+              title: title,
+              completed: completed,
+          };
+
           const response = await fetch('http://localhost:3500/todos', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ ...newTodo, userId: parseInt(userId) }),
+              body: JSON.stringify(newTodo),
           });
 
           if (!response.ok) {
@@ -123,20 +130,25 @@ const Todos = () => {
           }
 
           const addedTodo = await response.json();
-
-          // Update the state with the new todo
           setTodos([...todos, addedTodo]);
-
           setAddTodo(false);
+          setTitle('');
+          setCompleted(false);
       } catch (error) {
           console.error('Error adding todo:', error);
       }
   };
 
-  // Handle Cancel Add
-  const handleCancelAdd = () => {
-      setAddTodo(false);
+
+    // Handle Save Add
+    const handleAddTodo = () => {
+      setAddTodo(true);
   };
+
+
+  const handleCancelAdd = () => {
+    setAddTodo(false);
+};  
 
 
 
@@ -195,9 +207,14 @@ const Todos = () => {
 
     return (
       <div>
+        <header>
+        <h1>{actualUser.name}</h1>
+        </header>
         <h1>Todos</h1>
-        <div className="filter-options">
-          <div className="filter-select">
+        <form className={style.bar}>
+        <div className={style.filteroptions}>
+
+          <div className={style.filterselect}>
             <label htmlFor="filter">Sort by:</label>
             <select id="filter" value={filterOption} onChange={handleFilterChange}>
               <option value="serial">Serial</option>
@@ -206,16 +223,19 @@ const Todos = () => {
               <option value="random">Random</option>
             </select>
           </div>
-          <div className="search-bar">
+
+          <div className={style.searchbar}>
             <input
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={handleSearch}
             />
-            <Button type="button" onSubmit={handleSearchTodo} value="Search" className="search-button" />
+
+            <Button type="button" onClick={handleSearchTodo} value="Search" className="search-button" />
           </div>
-          <div className="checkboxes">
+
+          <div className={style.checkboxes}>
             <label>
               <input
                 type="checkbox"
@@ -225,6 +245,7 @@ const Todos = () => {
               />
               by Id
             </label>
+
             <label>
               <input
                 type="checkbox"
@@ -235,12 +256,15 @@ const Todos = () => {
               by Criteria
             </label>
           </div>
-          <Button type="button" onClick={handleAddTodo} value="Add" className="search-button" />
+
+          <Button type="button" onClick={handleAddTodo} value="Add" className="searchbutton" />
         </div>
-        <div className="todos-grid">
+
+      </form>
+        <div className={style.todosgrid}>
           {filteredTodos.length > 0 ? (
             filteredTodos.map((todo, index) => (
-              <div key={todo.id} className="user-todo">
+              <div key={todo.id} className={style.usertodo}>
                 <h2>{index + 1}: {todo.title}</h2>
                 <p><strong>User Id:</strong> {todo.userId}</p>
                 <p><strong>N° of todo:</strong> {todo.id}</p>
@@ -271,15 +295,39 @@ const Todos = () => {
                     />
                 </Modal>
             )}
-            {addTodo && (
-            <Modal>
-                <AddTodoForm
-                    onSave={handleSaveAdd}
-                    onCancel={handleCancelAdd}
-                />
-            </Modal>
-        )}
+           {addTodo && (
+                <Modal>
+                    <form className={style['add-form']} onSubmit={handleSaveAddTodo}>
+                        <h3>Add Todo</h3>
+                        <p>
+                            <label htmlFor='title'>Title:</label>
+                            <textarea
+                                id='title'
+                                type="text"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder='Title'
+                                required
+                            />
+                        </p>
+                        <p>
+                            <label htmlFor='completed'>
+                                Completed:
+                            </label>
+                            <input
+                                id='completed'
+                                type="checkbox"
+                                checked={completed}
+                                onChange={(e) => setCompleted(e.target.checked)}
+                            />
+                        </p>
+                        <button type='submit'>Save</button>
+                        <button type='button' onClick={handleCancelAdd}>Cancel</button>
+                    </form>
+                </Modal>
+            )}            
       </div>
+      
     );
 };
 

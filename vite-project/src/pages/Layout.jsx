@@ -18,7 +18,11 @@ const Layout = () => {
             <Link to="/register">Register</Link>
           </li>
           <li>
-            <Link to={user ? `/home/user/${user.id}` : '#'} className={!user ? 'notactive' : ''}>Home</Link>
+            <Link to={user ? `/home/user/${user.id}` : '#'} 
+            className={!user ? 'notactive' : ''}
+            >
+              Home
+            </Link>
           </li>
         </ul>
       </nav>
