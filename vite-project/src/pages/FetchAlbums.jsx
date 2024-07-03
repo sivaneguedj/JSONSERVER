@@ -1,22 +1,24 @@
-// Fetch.jsx
 import { useState, useEffect } from 'react';
 
-const API_URL = "jsonplaceholder.typicode.com/";
+const API_URL = "http://localhost:3500/";
 
-const Fetch = (typeRequest) => {
+const FetchAlbums = (typeRequest) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
  
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const encodedTypeRequest = encodeURIComponent(typeRequest);
-                const response = await fetch(`${API_URL}${encodedTypeRequest}`);
+               
+                const response = await fetch(`${API_URL}${typeRequest}`);
                 const data = await response.json();
                 setData(data);
-                setLoading(false);
+                console.log(data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
+                
+            }
+            finally{
                 setLoading(false);
             }
         };
@@ -24,7 +26,8 @@ const Fetch = (typeRequest) => {
         fetchItems();
     }, [typeRequest]);
 
-    return { data, loading };
+    return { data, loading,setData };
 };
 
-export default Fetch;
+export default FetchAlbums;
+

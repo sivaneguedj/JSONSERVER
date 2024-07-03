@@ -1,0 +1,32 @@
+.photos-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user-photo {
+    margin: 10px;
+    flex: 0 1 calc(25% - 20px); /* Pour que chaque photo occupe 25% de la largeur et ajoute une marge */
+    max-width: calc(25% - 20px); /* Pour gérer la largeur maximale de chaque photo */
+}
+
+.user-photo img {
+    width: 100%; /* Pour que l'image occupe toute la largeur du conteneur */
+    height: auto; /* Pour maintenir le ratio hauteur/largeur de l'image */
+}
+
+.photosGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.user-photo {
+    margin: 10px;
+    width: calc(25% - 20px); /* Pour que chaque photo occupe 25% de la largeur et ajoute une marge */
+    max-width: calc(25% - 20px); /* Pour gérer la largeur maximale de chaque photo */
+}
+
+.user-photo img {
+    width: 100%; /* Pour que l'image occupe toute la largeur du conteneur */
+    height: auto; /* Pour maintenir le ratio hauteur/largeur de l'image */
+}
