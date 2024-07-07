@@ -2,7 +2,7 @@ import Input from "/src/components/Input.jsx";
 import Button from "/src/components/Button.jsx";
 import React, { useState } from 'react';
 import  { useNavigate } from 'react-router-dom';
-import "./Login.Module.css";
+import styles from "/src/styles/Login.module.css";
 import Fetch from "/src/fetch.jsx";
 
 
@@ -30,10 +30,12 @@ const Register = () => {
       if (loading) return;
 
       try {
-          const user = users.find(user => user.username === username && user.website === password);
+          const user = users.find(user => user.username === username );
           
           if (user) {
-            throw new Error("User already exist in the system");              
+            if (user.username === username) {
+                throw new Error("Username already exist in the system"); 
+            }           
           }
           else {
             console.log("New user Accepted");
@@ -77,7 +79,7 @@ const Register = () => {
 
 
   return (
-  <form className="login" onSubmit={handleSubmit}>
+  <form className={styles.login} onSubmit={handleSubmit}>
       <h1>Register</h1>
       <Input
           type="text"
@@ -100,7 +102,7 @@ const Register = () => {
           onChange={handleVerPasswordChange}
           required
       />
-      <Button type="submit" onSubmit={handleRegister} value="Register" className='null' />
+      <Button type="button" onClick={handleRegister} value="Register" className='null' />
       {error && <p className="error">User already exist</p>}
   </form>
   )

@@ -1,15 +1,11 @@
 import React from 'react';
 
-export default function Button({ type, onSubmit, value, classname}) {
-
-
-    return(
-        <button 
-        className={classname}
-            onClick={onSubmit}
-            type={type}
-            > {value}
-        </button>
+const Button = ({ type, onClick, value, className }) => {
+    return (
+      <button type={type} onClick={onClick} className={className}>
+        {value}
+      </button>
     );
-
-}
+  };
+  
+  export default Button;

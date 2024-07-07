@@ -1,0 +1,322 @@
+
+body {font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  background-image: url('/src/Img/bgJson.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin-top: 60px;
+  position: relative;
+  top: 0;
+}
+
+.titleOptionsContainer {
+
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  margin: 20px auto;
+  max-width: 800px;
+  max-height: 900px;
+  text-align: center;
+}
+
+.titleOptionsContainer h1 {
+  margin-top: 0;
+  font-size: 12vh;
+  color: white;
+  text-shadow: 4px 4px 4px black;
+}
+
+.titleOptionsContainer .options {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 3px solid white ;
+  justify-content: center;
+}
+
+
+ .buttons {
+  margin-right: 10px;
+ }
+
+.button:hover {
+  border: 2px solid white;
+  background-color: (255, 255, 255, 0.5);
+}
+
+/* ------------------- Info Details ------------------- */
+
+.userInfo {
+  position: relative;
+  top: 20px;
+  left: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(200, 200, 200, 0.7);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.userInfo p,
+.userInfo p strong {
+  color: white;
+  font-size: 3vh;
+  text-shadow: 4px 4px 4px black;
+}
+
+.userInfo h2 {
+  color: white;
+  font-size: 5vh;
+  text-decoration: underline;
+  text-shadow: 4px 4px 4px black;
+}
+
+
+/* ------------------------ TODO ---------------------------- */
+
+.todosgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.usertodo {
+  background-color: rgba(0, 0, 0, 0.6) !important; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  color: white; 
+  border: 2px solid white;
+  z-index: 1005;
+}
+
+.usertodo h2 {
+  margin-top: 0;
+  font-size: 3vh;
+  text-align: center;
+  color: white;
+  text-shadow: 4px 4px 4px black;
+}
+
+.usertodo p,
+.usertodo p strong {
+  margin: 8px 0;
+  color: white;
+  text-shadow: 4px 4px 4px black;
+}
+
+
+.bar .filteroptions .searchbutton {
+  background-color: black;
+  color: white; 
+  margin-left: 20px;
+}
+
+.editDelete {
+  border: 2px solid white;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+.usertodo .buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+  text-align: center;
+  margin-top: 60px;
+}
+
+
+.filteroptions {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: large;
+  font-weight: 200;
+}
+
+.searchbarContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.filterselect {
+  margin-right: 20px; 
+}
+
+
+.filterselect,
+.searchbar {
+  margin-bottom: 10px;
+  border-radius: 20%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.searchbar input::placeholder {
+  font-weight: bold;
+  color: black;
+}
+
+
+.searchbar input,
+.filterselect select {
+  border: 2px solid white;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.checkboxes label, 
+.filterselect label {
+  font-weight: bolder;
+  text-shadow: 8px 8px 8px black;
+  font-weight: bold;
+}
+
+.filteroptions label {
+  margin-right: 10px;
+}
+
+.bar {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8); 
+  text-shadow: 4px 4px 4px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; 
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px; 
+  width: 100%; 
+}
+
+.add-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.add-form h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.add-form p {
+  margin-bottom: 15px;
+}
+
+.add-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.add-form textarea,
+.add-form input[type="text"] {
+  width: calc(100% - 22px); /* Adjusting for padding and border */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1em;
+  box-sizing: border-box; /* Ensuring padding is included in the width calculation */
+}
+
+.add-form textarea {
+  height: 100px;
+  resize: vertical; /* Allow users to resize the textarea vertically */
+}
+
+.add-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.add-form button[type="submit"],
+.add-form button[type="button"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-form button[type="submit"]:hover,
+.add-form button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.add-form button[type="button"] {
+  background-color: #6c757d;
+  margin-left: 10px;
+}
+
+.add-form button[type="button"]:hover {
+  background-color: #5a6268;
+}

@@ -2,7 +2,7 @@ import Input from "/src/components/Input.jsx";
 import Button from "/src/components/Button.jsx";
 import React, { useState } from 'react';
 import  { useNavigate } from 'react-router-dom';
-import "./Login.Module.css";
+import styles from "/src/styles/Login.module.css";
 import Fetch from "/src/fetch.jsx";
 
 
@@ -37,7 +37,7 @@ const Login = () => {
         }
         catch(err) {
             setError(true);
-            alert( err);
+            alert("Invalid username or password");
         }
         finally{
             setTimeout(() => {
@@ -60,7 +60,7 @@ const Login = () => {
 
 
     return (
-    <form className="login" onSubmit={handleSubmit}>
+    <form className={styles.login} onSubmit={handleSubmit}>
         <h1>Login</h1>
         <Input
             type="text"
@@ -76,7 +76,7 @@ const Login = () => {
             onChange={handlePasswordChange}
             required
         />
-        <Button type="submit" onSubmit={handleLogin} value="Login" className='null' />
+        <Button type="button" onClick={handleLogin} value="Login" className='null' />
         {error && <p className="error">Invalid username or password</p>}
     </form>
     )

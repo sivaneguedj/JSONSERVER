@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from 'react';
 import FetchAlbums from "./FetchAlbums";
 import SearchPost from "./searchPost";
+import styles from "/src/styles/Post.module.css";
 
 const Posts = () => {
     const { userId } = useParams();
@@ -73,7 +74,7 @@ const Posts = () => {
     };
 
     return (
-        <div className="container_Posts">
+        <div className={styles.container_Posts}>
             <h1>Posts of {actualUser.username}</h1>
             <div>
                 <label htmlFor="searchByPost">Search by: </label>
@@ -85,12 +86,12 @@ const Posts = () => {
             <SearchPost search={search} setSearch={setSearch} />
 
             {loading ? (
-                <div>Loading...</div>
+                <div className={styles.loading}>Loading...</div>
             ) : (
-                <div className="post-grid">
+                <div className={styles.postGrid}>
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div key={post.id} className="user-post">
+                            <div key={post.id} className={styles.userPost}>
                                 <h2>{post.title}</h2>
                                 <p>{post.body}</p>
                             </div>
@@ -101,7 +102,7 @@ const Posts = () => {
                 </div>
             )}
             <div>
-                <form onSubmit={handleCreatePost}>
+                <form onSubmit={handleCreatePost} className={styles.form}>
                     <h2>Create a New Post</h2>
                     <input
                         type="text"

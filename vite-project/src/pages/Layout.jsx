@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import "./Layout.Module.css";
+import "/src/styles/Layout.module.css";
 
 const Layout = () => {
 

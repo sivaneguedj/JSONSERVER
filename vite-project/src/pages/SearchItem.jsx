@@ -1,5 +1,5 @@
 
-import "./SearchItem.Module.css";
+import "/src/styles/SearchItem.module.css";
 
 const SearchItem = ({ search, setSearch }) => {
     return (

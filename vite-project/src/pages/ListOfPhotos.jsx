@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ImageCell from "./ImageCell";
 import FetchAlbums from "./FetchAlbums";
-import './ListOfPhotos.Module.css';
+import '/src/styles/ListOfPhotos.module.css';
 
 const ListOfPhotos = () => {
     const { albumId } = useParams();

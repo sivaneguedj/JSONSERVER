@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import Button from "/src/components/Button.jsx";
 import EditTodoForm from "/src/components/EditTodoForm.jsx";
 import Fetch from "/src/fetch.jsx";
-import style from './Home.module.css';
+import style from '/src/styles/Home.module.css';
 
 const Todos = () => {
     
   
-    const { userId } = useParams();
+    const { userId } = localStorage.getItem('users');
     const [filterOption, setFilterOption] = useState('serial');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchById, setSearchById] = useState(false);
@@ -21,7 +21,7 @@ const Todos = () => {
     const actualUser = JSON.parse(localStorage.getItem('user')) || {};
 
     // Fetch all todos data
-    const { data: todos, loading , setData: setTodos} = Fetch('todos/');
+    const { data: todos = [], loading , setData: setTodos} = Fetch('todos/');
 
         
     // Loading
@@ -107,11 +107,12 @@ const Todos = () => {
     const handleSaveAddTodo = async (e) => {
       e.preventDefault();
       try {
+
           const maxId = todos.reduce((max, todo) => Math.max(max, parseInt(todo.id)), 0);
           const newId = maxId + 1;
 
           const newTodo = {
-              userId: parseInt(userId),
+              userId: parsedUserId,
               id: newId,
               title: title,
               completed: completed,
@@ -208,7 +209,7 @@ const Todos = () => {
     return (
       <div>
         <header>
-        <h1>{actualUser.name}</h1>
+        <h1 >{actualUser.name}</h1>
         </header>
         <h1>Todos</h1>
         <form className={style.bar}>
@@ -224,69 +225,47 @@ const Todos = () => {
             </select>
           </div>
 
-          <div className={style.searchbar}>
-            <input
+
+          <div className={style.searchbarContainer}>
+           <div className={style.searchbar}>
+           <input
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={handleSearch}
             />
 
-            <Button type="button" onClick={handleSearchTodo} value="Search" className="search-button" />
+          <Button type="button" onClick={handleSearchTodo} value="Search" className={style.searchbutton} />
+
+           </div>
+            <div className={style.checkboxes}>
+              <label>
+                <input
+                  type="checkbox"
+                  name="byId"
+                  checked={searchById}
+                  onChange={handleCheckboxChange}
+                />
+                by Id
+              </label>
+
+              <label>
+                <input
+                  type="checkbox"
+                  name="byCriteria"
+                  checked={searchByCriteria}
+                  onChange={handleCheckboxChange}
+                />
+                by Criteria
+              </label>
+            </div>
           </div>
 
-          <div className={style.checkboxes}>
-            <label>
-              <input
-                type="checkbox"
-                name="byId"
-                checked={searchById}
-                onChange={handleCheckboxChange}
-              />
-              by Id
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="byCriteria"
-                checked={searchByCriteria}
-                onChange={handleCheckboxChange}
-              />
-              by Criteria
-            </label>
-          </div>
-
-          <Button type="button" onClick={handleAddTodo} value="Add" className="searchbutton" />
+          <Button type="button" onClick={handleAddTodo} value="Add" className={style.searchbutton}/>
         </div>
 
       </form>
-        <div className={style.todosgrid}>
-          {filteredTodos.length > 0 ? (
-            filteredTodos.map((todo, index) => (
-              <div key={todo.id} className={style.usertodo}>
-                <h2>{index + 1}: {todo.title}</h2>
-                <p><strong>User Id:</strong> {todo.userId}</p>
-                <p><strong>N° of todo:</strong> {todo.id}</p>
-                <p><strong>Title:</strong> {todo.title}</p>
-                <p><strong>Completed:</strong> {todo.completed ? 'Yes' : 'No'}</p>
-                <label>
-                  <input 
-                      type="checkbox" 
-                      checked={todo.completed}
-                      onChange={() => handleCompletedChange(todo.id)}  
-                  />
-                  Completed
-                </label>
-                <button onClick={() => handleEditTodo(todo)}>Edit</button>
-                <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-              </div>
-            ))
-          ) : (
-            <p>No todos found for this user.</p>
-          )}
-        </div>
-        {editTodo && (
+      {editTodo && (
                 <Modal>
                     <EditTodoForm
                         todo={editTodo}
@@ -325,7 +304,32 @@ const Todos = () => {
                         <button type='button' onClick={handleCancelAdd}>Cancel</button>
                     </form>
                 </Modal>
-            )}            
+            )}
+        <div className={style.todosgrid}>
+          {filteredTodos.length > 0 ? (
+            filteredTodos.map((todo, index) => (
+              <div key={todo.id} className={style.usertodo}>
+                <h2>{index + 1}: {todo.title}</h2>
+                <p><strong>User Id:</strong> {todo.userId}</p>
+                <p><strong>N° of todo:</strong> {todo.id}</p>
+                <p><strong>Title:</strong> {todo.title}</p>
+                <p><strong>Completed:</strong> {todo.completed ? 'Yes' : 'No'}</p>
+                <label>
+                  <input 
+                      type="checkbox" 
+                      checked={todo.completed}
+                      onChange={() => handleCompletedChange(todo.id)}  
+                  />
+                  Completed
+                </label>
+                <button onClick={() => handleEditTodo(todo)} className={style.editDelete}>Edit</button>
+                <button onClick={() => handleDeleteTodo(todo.id) } className={style.editDelete}>Delete</button>
+              </div>
+            ))
+          ) : (
+            <p>No todos found for this user.</p>
+          )}
+        </div>            
       </div>
       
     );

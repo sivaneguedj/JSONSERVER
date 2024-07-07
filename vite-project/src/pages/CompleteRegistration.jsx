@@ -2,7 +2,7 @@ import Input from "/src/components/Input.jsx";
 import Button from "/src/components/Button.jsx";
 import React, { useState, useEffect } from 'react';
 import  { useNavigate } from 'react-router-dom';
-import "./Login.Module.css";
+import style from "/src/styles/Login.module.css";
 
 
 
@@ -98,7 +98,7 @@ const CompleteRegistration = () => {
 
 
   return (
-    <form className="complete-registration login" onSubmit={handleCompleteRegistration}>
+    <form className={`${style.completeRegistration} ${style.login}`} onSubmit={handleCompleteRegistration}>
         <h1>Complete Registration</h1>
         <Input
             type="text"
@@ -199,7 +199,7 @@ const CompleteRegistration = () => {
             required
         />
         <Button type="submit" onSubmit={handleCompleteRegistration} value="Complete Registration" />
-        {error && <p className="error">Failed to complete registration</p>}
+        {error && <p className={style.error}>Failed to complete registration</p>}
     </form>
     );
   };

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import FetchAlbums from './FetchAlbums';
 import SearchItem from './SearchItem';
-import ListOfPhotos from './ListOfPhotos';
+import styles from "/src/styles/Albums.module.css";
+
 
 const Albums = () => {
     const { userId } = useParams();
@@ -79,10 +80,10 @@ const Albums = () => {
     };
 
     return (
-        <div className='container_album'>
+        <div className={styles.container_album}>
             <h1>Albums of {actualUser.username}</h1>
 
-            <div>
+            <div className={styles.forSearch}>
                 <label htmlFor="searchBy">Search by: </label>
                 <select id="searchBy" value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
                     <option value="title">Title</option>
@@ -92,10 +93,10 @@ const Albums = () => {
 
             <SearchItem search={search} setSearch={setSearch} />
 
-            <div className="albums-grid">
+            <div className={styles.albums_grid}>
                 {filteredAlbums.length > 0 ? (
                     filteredAlbums.map((album) => (
-                        <div key={album.id} className="user-album">
+                        <div key={album.id} className={styles.user_album}>
                             <Link to={`/albums/${album.id}`}>
                                 <p>Album #{album.id}: {album.title}</p>
                             </Link>
@@ -107,7 +108,7 @@ const Albums = () => {
                 )}
             </div>
 
-            <form onSubmit={handleCreateAlbum}>
+            <form onSubmit={handleCreateAlbum} className={styles.createAlbum}>
                 <h2>Create New Album</h2>
                 <input
                     type="text"

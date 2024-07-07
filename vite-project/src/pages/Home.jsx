@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from "/src/components/Button.jsx";
 import  { useNavigate, useParams } from 'react-router-dom';
-import style from './Home.module.css';
+import style from '/src/styles/Home.module.css';
 
 
 
@@ -39,17 +39,18 @@ const Home = () => {
 
   return(
     <main>
+      <div className={style.titleOptionsContainer}>
         <h1>{actualUser.name}</h1>
         <form className={style.options}>
-          <Button type="button" onSubmit={handleInfo} value="Info" className={style.info} />
-          <Button type="button" onSubmit={handleTodos} value="Todos" className={style.todos} />
-          <Button type="button" onSubmit={handlePosts} value="Posts" className={style.posts} />
-          <Button type="button" onSubmit={handleAlbums} value="Albums" className={style.albums} />
-          <Button type="button" onSubmit={handleLogout} value="Logout" className={style.logout} />
+          <Button type="button" onClick={handleInfo} value="Info" className={style.buttons} />
+          <Button type="button" onClick={handleTodos} value="Todos" className={style.buttons} />
+          <Button type="button" onClick={handlePosts} value="Posts" className={style.buttons} />
+          <Button type="button" onClick={handleAlbums} value="Albums" className={style.buttons} />
+          <Button type="button" onClick={handleLogout} value="Logout" className={style.buttons} />
         </form>
 
         {showInfo && (
-        <div className={style.info}>
+        <div className={style.userInfo}>
           <h2>User Information</h2>
           <p><strong>Username:</strong> {actualUser.username}</p>
           <p><strong>Email:</strong> {actualUser.email}</p>
@@ -61,7 +62,7 @@ const Home = () => {
           <p><strong>BS:</strong> {actualUser.company.bs}</p>
         </div>
       )}
-
+    </div>
     </main>  
 
   );
