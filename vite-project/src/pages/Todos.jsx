@@ -8,7 +8,8 @@ import style from '/src/styles/Home.module.css';
 const Todos = () => {
     
   
-    const { userId } = localStorage.getItem('users');
+    //const { userId } = localStorage.getItem('users');
+    const { userId } =  useParams();
     const [filterOption, setFilterOption] = useState('serial');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchById, setSearchById] = useState(false);
