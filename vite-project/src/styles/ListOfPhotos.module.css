@@ -5,13 +5,13 @@
 
 .user-photo {
     margin: 10px;
-    flex: 0 1 calc(25% - 20px); /* Pour que chaque photo occupe 25% de la largeur et ajoute une marge */
-    max-width: calc(25% - 20px); /* Pour gérer la largeur maximale de chaque photo */
+    flex: 0 1 calc(25% - 20px); 
+    max-width: calc(25% - 20px); 
 }
 
 .user-photo img {
-    width: 100%; /* Pour que l'image occupe toute la largeur du conteneur */
-    height: auto; /* Pour maintenir le ratio hauteur/largeur de l'image */
+    width: 100%; 
+    height: auto;
 }
 
 .photosGrid {
@@ -22,11 +22,11 @@
 
 .user-photo {
     margin: 10px;
-    width: calc(25% - 20px); /* Pour que chaque photo occupe 25% de la largeur et ajoute une marge */
-    max-width: calc(25% - 20px); /* Pour gérer la largeur maximale de chaque photo */
+    width: calc(25% - 20px);
+    max-width: calc(25% - 20px);
 }
 
 .user-photo img {
-    width: 100%; /* Pour que l'image occupe toute la largeur du conteneur */
-    height: auto; /* Pour maintenir le ratio hauteur/largeur de l'image */
+    width: 100%;
+    height: auto; 
 }

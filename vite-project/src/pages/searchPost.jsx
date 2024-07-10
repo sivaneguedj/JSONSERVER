@@ -1,6 +1,4 @@
 
-//import "./SearchItem.Module.css";
-
 const SearchPost = ({ search, setSearch }) => {
     return (
         <form className="searchForm" onSubmit={(e) => e.preventDefault()}>

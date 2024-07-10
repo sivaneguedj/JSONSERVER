@@ -18,7 +18,7 @@ const Layout = () => {
             <Link to="/register">Register</Link>
           </li>
           <li>
-            <Link to={user ? `/home/user/${user.id}` : '#'} 
+            <Link to={user ? `/home/users/${user.id}` : '#'} 
             className={!user ? 'notactive' : ''}
             >
               Home

@@ -12,7 +12,7 @@ const ListOfPhotos = () => {
     const photosPerPage = 10;
     const [newPhotoUrl, setNewPhotoUrl] = useState('');
     const [updatedPhotoUrl, setUpdatedPhotoUrl] = useState('');
-    const [editingPhotoId, setEditingPhotoId] = useState(null); // State to track which photo is being edited
+    const [editingPhotoId, setEditingPhotoId] = useState(null); 
 
     useEffect(() => {
         setLoadedImages(0);
@@ -100,7 +100,7 @@ const ListOfPhotos = () => {
 
             setPhotos(prevPhotos => prevPhotos.map(photo => photo.id === photoId ? { ...photo, ...updatedPhoto } : photo));
             setUpdatedPhotoUrl('');
-            setEditingPhotoId(null); // Reset editing state
+            setEditingPhotoId(null); 
         } catch (error) {
             console.error('Error updating photo:', error);
         }
@@ -108,7 +108,6 @@ const ListOfPhotos = () => {
 
     const handleEditPhoto = (photoId) => {
         setEditingPhotoId(photoId);
-        // Optionally, you can preload the current URL of the photo being edited
         const photoToUpdate = photos.find(photo => photo.id === photoId);
         if (photoToUpdate) {
             setUpdatedPhotoUrl(photoToUpdate.url);
