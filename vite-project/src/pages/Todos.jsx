@@ -17,6 +17,8 @@ const Todos = () => {
     const [completed, setCompleted] = useState(false);
     const actualUser = JSON.parse(localStorage.getItem('user')) || {};
 
+    console.log(userId);
+
     // Fetch all todos data
     const { data: todos, loading, setData: setTodos } = Fetch('todos/');
 
@@ -91,46 +93,49 @@ const Todos = () => {
 
     // Handle Add todo
     const handleSaveAddTodo = async (e) => {
-      e.preventDefault();
-      try {
-          const newTodo = {
-              userId: parseInt(userId),
-              title: title,
-              completed: completed,
-          };
-  
-          console.log('Adding new todo:', newTodo);
-  
-          const response = await fetch('http://localhost:3500/todos', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(newTodo),
-          });
-  
-          if (!response.ok) {
-              console.error(`Failed to add todo: ${response.statusText}`);
-              throw new Error('Failed to add todo');
-          }
-  
-          const addedTodo = await response.json();
-          console.log('New todo added:', addedTodo);
-  
-          // Update the state with the new todo
-          setTodos(prevTodos => {
-              const updatedTodos = [...prevTodos, addedTodo];
-              console.log('Updated todos:', updatedTodos);
-              return updatedTodos;
-          });
-  
-          setAddTodo(false);
-          setTitle('');
-          setCompleted(false);
-      } catch (error) {
-          console.error('Error adding todo:', error);
-      }
-  };
+        e.preventDefault();
+        try {
+            const newTodo = {
+                userId: parseInt(userId),
+                title: title,
+                completed: completed,
+            };
+            console.log(parseInt(userId));
+    
+            console.log('Adding new todo:', newTodo);
+    
+            const response = await fetch('http://localhost:3500/todos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newTodo),
+            });
+    
+            if (!response.ok) {
+                console.error(`Failed to add todo: ${response.statusText}`);
+                throw new Error('Failed to add todo');
+            }
+    
+            const addedTodo = await response.json();
+            console.log('New todo added:', addedTodo);
+    
+            // Update the state with the new todo
+            setTodos(prevTodos => {
+                const updatedTodos = [...prevTodos, addedTodo];
+                console.log('Updated todos:', updatedTodos);
+                return updatedTodos;
+            });
+    
+            setAddTodo(false);
+            setTitle('');
+            setCompleted(false);
+        } catch (error) {
+            console.error('Error adding todo:', error);
+        }
+    };
+    
+    
   
 
     // Handle Save Add
