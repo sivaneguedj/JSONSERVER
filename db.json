@@ -599,6 +599,47 @@
       "id": "100",
       "title": "at nam consequatur ea labore ea harum",
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
+    },
+    {
+      "id": "101",
+      "userId": null,
+      "title": "hello",
+      "body": "worls"
+    },
+    {
+      "id": "102",
+      "userId": null,
+      "title": "hello",
+      "body": "body"
+    },
+    {
+      "title": "1111",
+      "body": "1111",
+      "id": "103"
+    },
+    {
+      "id": "105",
+      "userId": 14,
+      "title": "Hello",
+      "body": "hello my friend"
+    },
+    {
+      "id": "106",
+      "userId": 14,
+      "title": "Title1",
+      "body": "Body of title 1"
+    },
+    {
+      "id": "107",
+      "userId": 14,
+      "title": "today",
+      "body": "Today is a good day"
+    },
+    {
+      "id": "108",
+      "userId": 14,
+      "title": "Hello",
+      "body": "hello"
     }
   ],
   "comments": [
@@ -4101,14 +4142,37 @@
       "name": "ex eaque eum natus",
       "email": "Emma@joanny.ca",
       "body": "perspiciatis quis doloremque\nveniam nisi eos velit sed\nid totam inventore voluptatem laborum et eveniet\naut aut aut maxime quia temporibus ut omnis"
+    },
+    {
+      "id": "501",
+      "postId": 2,
+      "name": "Hachen",
+      "email": "k@k.k",
+      "body": "hellooooo"
+    },
+    {
+      "id": "502",
+      "postId": 105,
+      "name": "Hachen",
+      "email": "k@k.k",
+      "body": "gege"
+    },
+    {
+      "id": "503",
+      "postId": 1,
+      "name": "Hachen",
+      "email": "k@k.k",
+      "body": "rere"
+    },
+    {
+      "id": "505",
+      "postId": 105,
+      "name": "Hachen",
+      "email": "k@k.k",
+      "body": "cx"
     }
   ],
   "albums": [
-    {
-      "userId": 1,
-      "id": "1",
-      "title": "quidem molestiae enim"
-    },
     {
       "userId": 1,
       "id": "2",
@@ -4628,6 +4692,26 @@
       "id": "1f58",
       "userId": "2",
       "title": "nono"
+    },
+    {
+      "id": "2",
+      "userId": 14,
+      "title": "dede"
+    },
+    {
+      "id": "3",
+      "userId": 14,
+      "title": "sasa"
+    },
+    {
+      "id": "4",
+      "userId": 14,
+      "title": "xaxa"
+    },
+    {
+      "id": "5",
+      "userId": 14,
+      "title": "jhjh"
     }
   ],
   "photos": [
@@ -5680,20 +5764,6 @@
       "title": "ipsum numquam ratione facilis provident animi reprehenderit ut",
       "url": "https://via.placeholder.com/600/3689cd",
       "thumbnailUrl": "https://via.placeholder.com/150/3689cd"
-    },
-    {
-      "albumId": 4,
-      "id": "151",
-      "title": "possimus dolor minima provident ipsam",
-      "url": "https://via.placeholder.com/600/1d2ad4",
-      "thumbnailUrl": "https://via.placeholder.com/150/1d2ad4"
-    },
-    {
-      "albumId": 4,
-      "id": "152",
-      "title": "et accusantium enim pariatur eum nihil fugit",
-      "url": "https://via.placeholder.com/600/a01c5b",
-      "thumbnailUrl": "https://via.placeholder.com/150/a01c5b"
     },
     {
       "albumId": 4,
@@ -40792,9 +40862,15 @@
       "completed": true
     },
     {
+<<<<<<< HEAD
       "id": "d689",
       "userId": 12,
       "title": "Hey There ",
+=======
+      "id": "bbeb",
+      "userId": 14,
+      "title": "world",
+>>>>>>> 20fe7e22fe46da49a1615b9754dbe5872451f157
       "completed": false
     }
   ],
@@ -41087,6 +41163,26 @@
         "name": "Darty",
         "catchPhrase": "hello there",
         "bs": "jbkivzvlfyhvEDEVCRBYUJ"
+      }
+    },
+    {
+      "id": "14",
+      "username": "Aled",
+      "website": "0000",
+      "name": "Hachen",
+      "email": "k@k.k",
+      "address": {
+        "street": "e",
+        "suite": "e",
+        "city": "e",
+        "zipcode": "e",
+        "geo": "e"
+      },
+      "phone": "e",
+      "company": {
+        "name": "e",
+        "catchPhrase": "e",
+        "bs": "e"
       }
     }
   ]

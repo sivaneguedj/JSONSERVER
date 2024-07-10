@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import FetchAlbums from './FetchAlbums';
 import SearchItem from './SearchItem';
-import styles from "/src/styles/Albums.module.css";
-
+import styles from '/src/styles/Albums.module.css';
 
 const Albums = () => {
     const { userId } = useParams();
     const [search, setSearch] = useState('');
     const [searchBy, setSearchBy] = useState('title');
-    const [nextId, setNextId] = useState(1); // Définir l'ID initial à 1
+    const [nextId, setNextId] = useState(1);
     const actualUser = JSON.parse(localStorage.getItem('user')) || {};
     const { data: albums, loading, setData: setAlbums } = FetchAlbums(`albums?userId=${encodeURIComponent(userId)}`);
+   
+    useEffect(() => {
+        if (albums.length > 0) {
+            const maxId = Math.max(...albums.map(album => parseInt(album.id)));
+            setNextId(maxId + 1);
+        }
+    }, [albums]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -22,7 +28,7 @@ const Albums = () => {
         if (searchBy === 'title') {
             return album.title.toLowerCase().includes(searchLower);
         } else if (searchBy === 'serial') {
-            return (albums.indexOf(album) + 1).toString().includes(searchLower);
+            return album.id.toString().includes(searchLower);
         }
         return false;
     });
@@ -46,8 +52,8 @@ const Albums = () => {
                 throw new Error('Failed to create new album');
             }
 
-            setAlbums((prevAlbums) => [...prevAlbums, newAlbum]);
-            setNextId(nextId + 1); // Incrémentation de l'ID pour le prochain album
+            setAlbums(prevAlbums => [...prevAlbums, newAlbum]);
+            setNextId(nextId + 1);
             alert('Album created successfully!');
         } catch (error) {
             console.error('Error creating album:', error);
@@ -56,6 +62,10 @@ const Albums = () => {
     };
 
     const deleteAlbum = async (albumId) => {
+        if (!window.confirm('Are you sure you want to delete this album?')) {
+            return;
+        }
+
         try {
             const response = await fetch(`http://localhost:3500/albums/${albumId}`, {
                 method: 'DELETE',
@@ -64,7 +74,7 @@ const Albums = () => {
                 throw new Error('Failed to delete album');
             }
 
-            setAlbums((prevAlbums) => prevAlbums.filter(album => album.id !== albumId));
+            setAlbums(prevAlbums => prevAlbums.filter(album => album.id !== albumId));
             alert('Album deleted successfully!');
         } catch (error) {
             console.error('Error deleting album:', error);
@@ -80,25 +90,39 @@ const Albums = () => {
     };
 
     return (
-        <div className={styles.container_album}>
-            <h1>Albums of {actualUser.username}</h1>
+        <div className={styles.albumContainer}>
+            <header>
+                <h1>{actualUser.username}'s Albums</h1>
+            </header>
 
-            <div className={styles.forSearch}>
+            <div className={styles.formContainer}>
                 <label htmlFor="searchBy">Search by: </label>
                 <select id="searchBy" value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
                     <option value="title">Title</option>
                     <option value="serial">Serial Number</option>
                 </select>
+                <SearchItem search={search} setSearch={setSearch} />
             </div>
 
-            <SearchItem search={search} setSearch={setSearch} />
+            <div>
+                <form onSubmit={handleCreateAlbum} className={styles.createForm}>
+                    <h2>Create New Album</h2>
+                    <input
+                        type="text"
+                        placeholder="Enter the title of album"
+                        name="albumTitle"
+                        required
+                    />
+                    <button type="submit" className={styles.buttonCreateAlbum}>Add</button>
+                </form>
+            </div>
 
-            <div className={styles.albums_grid}>
+            <div className={styles.albumsGrid}>
                 {filteredAlbums.length > 0 ? (
                     filteredAlbums.map((album) => (
-                        <div key={album.id} className={styles.user_album}>
+                        <div key={album.id} className={styles.selectedAlbum}>
                             <Link to={`/albums/${album.id}`}>
-                                <p>Album #{album.id}: {album.title}</p>
+                                <p>Album {album.id}: {album.title}</p>
                             </Link>
                             <button onClick={() => deleteAlbum(album.id)}>Delete</button>
                         </div>
@@ -107,20 +131,8 @@ const Albums = () => {
                     <p>NO ALBUM FOUND.</p>
                 )}
             </div>
-
-            <form onSubmit={handleCreateAlbum} className={styles.createAlbum}>
-                <h2>Create New Album</h2>
-                <input
-                    type="text"
-                    placeholder="Enter the title of album"
-                    name="albumTitle"
-                    required
-                />
-                <button type="submit">Create an Album</button>
-            </form>
         </div>
     );
 };
 
 export default Albums;
-

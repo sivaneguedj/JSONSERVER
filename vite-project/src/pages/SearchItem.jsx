@@ -1,15 +1,16 @@
 
-import "/src/styles/SearchItem.module.css";
+
+import '/src/styles/SearchItem.module.css';
 
 const SearchItem = ({ search, setSearch }) => {
     return (
         <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="search">Search</label>
+            <label htmlFor="search"></label>
             <input
                 id='search'
                 type='text'
                 role='searchbox'
-                placeholder='Search Album'
+                placeholder='Search'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
